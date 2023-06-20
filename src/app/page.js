@@ -3,6 +3,7 @@ import { Button, Container, Text } from '@/app/chakra';
 import Navbar from './components/Navbar';
 import Search from './components/Search';
 import PokemonCard from './components/PokemonCard';
+import PokemonInfiniteScroll from './components/PokemonInfiniteScroll';
 import { useState } from 'react';
 
 export default function Home() {
@@ -18,6 +19,8 @@ export default function Home() {
       <Search setPokemonData={(res) => setPokemonData(res)} setLoading={setLoading} />
 
       {pokemonData && <PokemonCard pokemonData={pokemonData} />}
+
+      <PokemonInfiniteScroll/>
     </Container>
   )
 }
