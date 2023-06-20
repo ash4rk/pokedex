@@ -2,18 +2,20 @@
 import { Button, Input, useToast} from "@/app/chakra";
 import { useState } from "react";
 
-const Search = ({ setUserData, setLoading }) => {
+const Search = ({ setPokemonData, setLoading }) => {
 	const [query, setQuery] = useState("");
     const toast = useToast();
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		if (!query) return;
+        setLoading(true);
+        setPokemonData(null);
 		try {
 			const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${query}`);
 			const data = await res.json();
-
-			console.log(data, "data is here");
+            
+            setPokemonData(data);
 		} catch (error) {
 			toast({
 				title: "Error",
@@ -23,7 +25,7 @@ const Search = ({ setUserData, setLoading }) => {
 				isClosable: true,
 			});
 		} finally {
-
+            setLoading(false);
 		}
 	};
 
